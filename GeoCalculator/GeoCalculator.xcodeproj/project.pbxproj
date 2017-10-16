@@ -18,6 +18,9 @@
 		9EDE88121E36AF3800C2F900 /* DecimalMinusTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EDE88111E36AF3800C2F900 /* DecimalMinusTextField.swift */; };
 		9EDE88141E36B02700C2F900 /* CLLocationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EDE88131E36B02700C2F900 /* CLLocationExtensions.swift */; };
 		9EDE88171E36B17C00C2F900 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EDE88161E36B17C00C2F900 /* CoreLocation.framework */; };
+		B86993EE1F95199B004DA3D2 /* GeoCalcTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86993ED1F95199B004DA3D2 /* GeoCalcTextField.swift */; };
+		B86993F01F951BE8004DA3D2 /* GeoCalcLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86993EF1F951BE8004DA3D2 /* GeoCalcLabel.swift */; };
+		B86993F21F9525F2004DA3D2 /* GeoCalcButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86993F11F9525F2004DA3D2 /* GeoCalcButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +58,9 @@
 		9EDE88111E36AF3800C2F900 /* DecimalMinusTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecimalMinusTextField.swift; sourceTree = "<group>"; };
 		9EDE88131E36B02700C2F900 /* CLLocationExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLLocationExtensions.swift; sourceTree = "<group>"; };
 		9EDE88161E36B17C00C2F900 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		B86993ED1F95199B004DA3D2 /* GeoCalcTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoCalcTextField.swift; sourceTree = "<group>"; };
+		B86993EF1F951BE8004DA3D2 /* GeoCalcLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoCalcLabel.swift; sourceTree = "<group>"; };
+		B86993F11F9525F2004DA3D2 /* GeoCalcButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoCalcButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,9 +118,12 @@
 				9EDE87E51E36AC2C00C2F900 /* ViewController.swift */,
 				9EDE88131E36B02700C2F900 /* CLLocationExtensions.swift */,
 				9EDE87E71E36AC2C00C2F900 /* Main.storyboard */,
+				B86993EF1F951BE8004DA3D2 /* GeoCalcLabel.swift */,
+				B86993F11F9525F2004DA3D2 /* GeoCalcButton.swift */,
 				9EDE87EA1E36AC2C00C2F900 /* Assets.xcassets */,
 				9EDE87EC1E36AC2C00C2F900 /* LaunchScreen.storyboard */,
 				9EDE87EF1E36AC2C00C2F900 /* Info.plist */,
+				B86993ED1F95199B004DA3D2 /* GeoCalcTextField.swift */,
 				9EC2C62E1E4A690B009BC940 /* SettingsViewController.swift */,
 			);
 			path = GeoCalculator;
@@ -283,10 +292,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B86993F21F9525F2004DA3D2 /* GeoCalcButton.swift in Sources */,
 				9EDE88121E36AF3800C2F900 /* DecimalMinusTextField.swift in Sources */,
 				9EDE88141E36B02700C2F900 /* CLLocationExtensions.swift in Sources */,
+				B86993EE1F95199B004DA3D2 /* GeoCalcTextField.swift in Sources */,
 				9EDE87E61E36AC2C00C2F900 /* ViewController.swift in Sources */,
 				9EC2C62F1E4A690B009BC940 /* SettingsViewController.swift in Sources */,
+				B86993F01F951BE8004DA3D2 /* GeoCalcLabel.swift in Sources */,
 				9EDE87E41E36AC2C00C2F900 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
