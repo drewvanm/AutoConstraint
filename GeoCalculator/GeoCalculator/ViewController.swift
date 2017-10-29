@@ -9,8 +9,20 @@
 import UIKit
 import CoreLocation
 
-class ViewController: UIViewController {
-    var entries : [LocationLookup] = []
+class ViewController: UIViewController, HistoryTableViewControllerDelegate{
+    
+    func selectEntry(entry: LocationLookup) {
+        self.p1Lat.text = entry.origLat.description
+        self.p1Lng.text = entry.origLng.description
+        self.p2Lat.text = entry.destLat.description
+        self.p2Lng.text = entry.destLng.description
+        self.doCalculatations()
+    }
+    
+    var entries : [LocationLookup] = [
+        LocationLookup(origLat: 90.0, origLng: 0.0, destLat: -90.0, destLng: 0.0, timestamp: Date.distantPast),
+        LocationLookup(origLat: -90.0, origLng: 0.0, destLat: 90.0, destLng: 0.0, timestamp: Date.distantFuture)]
+
 
     @IBOutlet weak var p1Lat: DecimalMinusTextField!
     @IBOutlet weak var p1Lng: DecimalMinusTextField!
@@ -83,12 +95,13 @@ class ViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "historySegue"{
-            if let dest = segue.destination.childViewControllers[0] as? HistoryTableTableViewController{
+            if let dest = segue.destination as? HistoryTableTableViewController{
                 dest.entries = self.entries
+                dest.delegate = self
             }
         }
         if segue.identifier == "settingsSegue" {
-            if let dest = segue.destination.childViewControllers[0] as? SettingsViewController {
+            if let dest = segue.destination as? SettingsViewController {
                 dest.dUnits = self.distanceUnits
                 dest.bUnits = self.bearingUnits
                 dest.delegate = self

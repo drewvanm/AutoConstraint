@@ -23,6 +23,7 @@
 		B86993F21F9525F2004DA3D2 /* GeoCalcButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86993F11F9525F2004DA3D2 /* GeoCalcButton.swift */; };
 		B8AD148A1FA3A12000409CAB /* LocationLookup.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AD14891FA3A12000409CAB /* LocationLookup.swift */; };
 		B8AD148C1FA3A4E200409CAB /* HistoryTableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AD148B1FA3A4E200409CAB /* HistoryTableTableViewController.swift */; };
+		B8AD14901FA65D4700409CAB /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AD148F1FA65D4700409CAB /* HistoryTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,7 @@
 		B86993F11F9525F2004DA3D2 /* GeoCalcButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoCalcButton.swift; sourceTree = "<group>"; };
 		B8AD14891FA3A12000409CAB /* LocationLookup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationLookup.swift; sourceTree = "<group>"; };
 		B8AD148B1FA3A4E200409CAB /* HistoryTableTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableTableViewController.swift; sourceTree = "<group>"; };
+		B8AD148F1FA65D4700409CAB /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +133,7 @@
 				9EDE87EF1E36AC2C00C2F900 /* Info.plist */,
 				B86993ED1F95199B004DA3D2 /* GeoCalcTextField.swift */,
 				9EC2C62E1E4A690B009BC940 /* SettingsViewController.swift */,
+				B8AD148F1FA65D4700409CAB /* HistoryTableViewCell.swift */,
 			);
 			path = GeoCalculator;
 			sourceTree = "<group>";
@@ -306,6 +309,7 @@
 				9EC2C62F1E4A690B009BC940 /* SettingsViewController.swift in Sources */,
 				B86993F01F951BE8004DA3D2 /* GeoCalcLabel.swift in Sources */,
 				B8AD148C1FA3A4E200409CAB /* HistoryTableTableViewController.swift in Sources */,
+				B8AD14901FA65D4700409CAB /* HistoryTableViewCell.swift in Sources */,
 				B8AD148A1FA3A12000409CAB /* LocationLookup.swift in Sources */,
 				9EDE87E41E36AC2C00C2F900 /* AppDelegate.swift in Sources */,
 			);
