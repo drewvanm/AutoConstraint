@@ -10,6 +10,7 @@ import UIKit
 import CoreLocation
 
 class ViewController: UIViewController {
+    var entries : [LocationLookup] = []
 
     @IBOutlet weak var p1Lat: DecimalMinusTextField!
     @IBOutlet weak var p1Lng: DecimalMinusTextField!
@@ -54,11 +55,14 @@ class ViewController: UIViewController {
         } else {
             self.bearingLabel.text = "Bearing: \((bearing * 1777.7777777778).rounded() / 100.0) mils."
         }
+        entries.append(LocationLookup(origLat: p1lt, origLng: p1ln, destLat: p2lt,
+                                      destLng: p2ln, timestamp: Date()))
     }
     
     @IBAction func calculateButtonPressed(_ sender: UIButton) {
         self.doCalculatations()
         self.view.endEditing(true)
+        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -78,6 +82,11 @@ class ViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "historySegue"{
+            if let dest = segue.destination.childViewControllers[0] as? HistoryTableTableViewController{
+                dest.entries = self.entries
+            }
+        }
         if segue.identifier == "settingsSegue" {
             if let dest = segue.destination.childViewControllers[0] as? SettingsViewController {
                 dest.dUnits = self.distanceUnits
