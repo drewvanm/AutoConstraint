@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import GooglePlaces
+let GOOGLE_PLACES_API_KEY = "AIzaSyBC7SnY917MI3IacpqllzdL7RGPJKLCm7U"
 
 let BACKGROUND_COLOR = UIColor.init(colorLiteralRed:0.000, green:0.469, blue:0.200,
                                     alpha:1.00)
@@ -22,6 +24,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         application.statusBarStyle = UIStatusBarStyle.lightContent
+        
+        GMSPlacesClient.provideAPIKey(GOOGLE_PLACES_API_KEY)
         
         let navAppearance = UINavigationBar.appearance()
         navAppearance.barTintColor = BACKGROUND_COLOR

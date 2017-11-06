@@ -99,14 +99,18 @@ class ViewController: UIViewController, HistoryTableViewControllerDelegate{
                 dest.entries = self.entries
                 dest.delegate = self
             }
-        }
-        if segue.identifier == "settingsSegue" {
+        } else if segue.identifier == "settingsSegue" {
             if let dest = segue.destination as? SettingsViewController {
                 dest.dUnits = self.distanceUnits
                 dest.bUnits = self.bearingUnits
                 dest.delegate = self
             }
+        } else if segue.identifier == "searchSegue" {
+            if let dest = segue.destination as? LocationSearchViewController{
+                dest.delegate = self
+            }
         }
+        
     }
 }
 
@@ -116,6 +120,16 @@ extension ViewController : SettingsViewControllerDelegate
     {
         self.distanceUnits = distanceUnits
         self.bearingUnits = bearingUnits
+        self.doCalculatations()
+    }
+}
+extension ViewController: LocationSearchDelegate {
+    func set(calculationData: LocationLookup)
+    {
+        self.p1Lat.text = "\(calculationData.origLat)"
+        self.p1Lng.text = "\(calculationData.origLng)"
+        self.p2Lat.text = "\(calculationData.destLat)"
+        self.p2Lng.text = "\(calculationData.destLng)"
         self.doCalculatations()
     }
 }
