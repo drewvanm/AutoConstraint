@@ -8,7 +8,7 @@
 
 import UIKit
 import CoreLocation
-
+import Firebase
 class ViewController: UIViewController, HistoryTableViewControllerDelegate{
     
     func selectEntry(entry: LocationLookup) {
@@ -23,7 +23,8 @@ class ViewController: UIViewController, HistoryTableViewControllerDelegate{
         LocationLookup(origLat: 90.0, origLng: 0.0, destLat: -90.0, destLng: 0.0, timestamp: Date.distantPast),
         LocationLookup(origLat: -90.0, origLng: 0.0, destLat: 90.0, destLng: 0.0, timestamp: Date.distantFuture)]
 
-
+    fileprivate var ref : DatabaseReference?
+    
     @IBOutlet weak var p1Lat: DecimalMinusTextField!
     @IBOutlet weak var p1Lng: DecimalMinusTextField!
     @IBOutlet weak var p2Lat: DecimalMinusTextField!
@@ -39,6 +40,32 @@ class ViewController: UIViewController, HistoryTableViewControllerDelegate{
         super.viewDidLoad()
         self.view.backgroundColor = BACKGROUND_COLOR
         // Do any additional setup after loading the view, typically from a nib.
+        self.ref = Database.database().reference()
+        self.registerForFireBaseUpdates()
+    }
+    
+    fileprivate func registerForFireBaseUpdates()
+    {
+        self.ref!.child("history").observe(.value, with: { snapshot in
+            if let postDict = snapshot.value as? [String : AnyObject] {
+                var tmpItems = [LocationLookup]()
+                for (_,val) in postDict.enumerated() {
+                    let entry = val.1 as! Dictionary<String,AnyObject>
+                    let timestamp = entry["timestamp"] as! String?
+                    let origLat = entry["origLat"] as! Double?
+                    let origLng = entry["origLng"] as! Double?
+                    let destLat = entry["destLat"] as! Double?
+                    let destLng = entry["destLng"] as! Double?
+                    
+                    tmpItems.append(LocationLookup(origLat: origLat!,
+                                                   origLng: origLng!, destLat: destLat!,
+                                                   destLng: destLng!,
+                                                   timestamp: (timestamp?.dateFromISO8601)!))
+                }
+                self.entries = tmpItems
+            }
+        })
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -67,10 +94,25 @@ class ViewController: UIViewController, HistoryTableViewControllerDelegate{
         } else {
             self.bearingLabel.text = "Bearing: \((bearing * 1777.7777777778).rounded() / 100.0) mils."
         }
-        entries.append(LocationLookup(origLat: p1lt, origLng: p1ln, destLat: p2lt,
-                                      destLng: p2ln, timestamp: Date()))
+        
+        // save history to firebase
+        let entry = LocationLookup(origLat: p1lt, origLng: p1ln, destLat: p2lt,
+                                   destLng: p2ln, timestamp: Date())
+        let newChild = self.ref?.child("history").childByAutoId()
+        newChild?.setValue(self.toDictionary(vals: entry))
+
     }
     
+    func toDictionary(vals: LocationLookup) -> NSDictionary {
+        return [
+            "timestamp": NSString(string: (vals.timestamp.iso8601)),
+            "origLat" : NSNumber(value: vals.origLat),
+            "origLng" : NSNumber(value: vals.origLng),
+            "destLat" : NSNumber(value: vals.destLat),
+            "destLng" : NSNumber(value: vals.destLng),
+        ]
+    }
+
     @IBAction func calculateButtonPressed(_ sender: UIButton) {
         self.doCalculatations()
         self.view.endEditing(true)
@@ -131,5 +173,35 @@ extension ViewController: LocationSearchDelegate {
         self.p2Lat.text = "\(calculationData.destLat)"
         self.p2Lng.text = "\(calculationData.destLng)"
         self.doCalculatations()
+    }
+}
+extension Date {
+    struct Formatter2 {
+        static let iso8601: DateFormatter = {
+            let formatter = DateFormatter()
+            formatter.calendar = Calendar(identifier: .iso8601)
+            formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSxxx"
+            return formatter
+        }()
+        
+        static let short: DateFormatter = {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd"
+            return formatter
+        }()
+    }
+    
+    var short2: String {
+        return Formatter2.short.string(from: self)
+    }
+    
+    var iso8601: String {
+        return Formatter2.iso8601.string(from: self)
+    }
+}
+
+extension String {
+    var dateFromISO8601: Date? {
+        return Date.Formatter2.iso8601.date(from: self)
     }
 }
